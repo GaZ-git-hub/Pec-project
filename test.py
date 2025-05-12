@@ -14,3 +14,9 @@ def test_check_wall_collision_true():
 def test_check_wall_collision_false():
     head = [5,5]
     assert check_wall_collision(head) == False
+if __name__ == "__main__":
+    test_check_self_collision_true()
+    test_check_self_collision_false()
+    test_check_wall_collision_true()
+    test_check_wall_collision_false()
+    print("Test passed")

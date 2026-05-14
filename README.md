@@ -42,7 +42,7 @@ Jednoduchá implementace klasické hry Snake v Pythonu s využitím knihovny Pyg
 
 Pro spuštění testů (např. test kolize):
 ```bash
-pytest
+pytest test.py
 ```
 
 ## 👤 Autoři

@@ -18,6 +18,7 @@ font = pygame.font.SysFont(None, 30)  # Pismo pro text
 
 clock = pygame.time.Clock()  # Hodiny pro spravu snimku za sekundu
 
+
 # Funkce pro zobrazeni uvodni obrazovky s nazvem a instrukcemi
 def show_start_menu():
     screen.fill("Black")  # Nastaveni pozadi na cerne
@@ -41,6 +42,7 @@ def show_start_menu():
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:  # Kdyz stisknuto Space
                 waiting = False  # Zavre uvodni obrazovku a spusti hru
 
+
 # Funkce pro pohyb hada
 def snake_movement(snake, direction, grow=False):
     head_x, head_y = snake[0]  # Pozice hlavy hada
@@ -58,14 +60,17 @@ def snake_render(snake):
         color = "YELLOW" if i == 0 else "YELLOW1" if i == 1 else "YELLOW2" if i == 2 else "YELLOW3"  # Barvy pro jednotlivé casti hada
         pygame.draw.rect(screen, color, rect)  # Vykresleni obdelniku
 
+
 # Funkce pro kontrolu, zda se had neudelal do zdi
 def check_wall_collision(head):
     x, y = head  # Ziskani souradnic hlavy hada
     return x < 0 or x >= Grid_Width or y < 0 or y >= Grid_Height  # Pokud hlava vyboči z mrizky
 
+
 # Funkce pro kontrolu, zda se had nesrazi sám se sebou
 def check_self_collision(snake):
     return snake[0] in snake[1:]  # Pokud se hlava hada nachazi v tele hada
+
 
 # Funkce pro vytvoreni noveho jablka na nahodne pozici, ktera neni obsazena hadem
 def apple_spawn(snake):
@@ -75,10 +80,12 @@ def apple_spawn(snake):
         if (x, y) not in snake:  # Pokud pozice neni obsazena hadem
             return x, y
 
+
 # Funkce pro vykresleni jablka
 def apple_render(apple):
     circ = (apple[0] * Cell_Size, apple[1] * Cell_Size, Cell_Size, Cell_Size)  # Nastaveni obdelniku pro jablko
     pygame.draw.rect(screen, "BLUE", circ)  # Vykresleni jablka modrou barvou
+
 
 # Funkce pro vykresleni mrizky
 def draw_grid():
@@ -87,10 +94,11 @@ def draw_grid():
     for y in range(0, Height, Cell_Size):
         pygame.draw.line(screen, (50, 150, 50), (0, y), (Width, y))  # Svisle cary
 
+
 # Funkce pro zobrazeni obrazovky pri prohre
 def game_over():
     font = pygame.font.SysFont(None, 30)  # Pismo pro text
-    text = font.render(f"GAME OVER, PRESS R TO RESTART OR Q TO QUIT", False, (255,0,0))  # Text pro konec hry
+    text = font.render("GAME OVER, PRESS R TO RESTART OR Q TO QUIT", False, (255,0,0))  # Text pro konec hry
     rect = text.get_rect(center=(Width//2, Height//2))  # Nastaveni pozice textu
     screen.blit(text, rect)  # Zobrazeni textu na obrazovce
     pygame.display.flip()  # Aktualizace obrazovky
@@ -107,6 +115,7 @@ def game_over():
                 if event.key == pygame.K_r:  # Pokud stisknuto R, restartuje hru
                     waiting = False
 
+
 # Funkce pro blikani obrazovky pri prohre
 def game_over_flash():
     for _ in range(3):
@@ -117,9 +126,11 @@ def game_over_flash():
         pygame.display.flip()  # Aktualizace obrazovky
         pygame.time.wait(100)  # Cekani 100ms
 
+
 # Funkce pro resetovani hry
 def reset_game():
     return [(5, 5), (4, 5), (3, 5)], (1, 0), apple_spawn([(5, 5), (4, 5), (3, 5)]), 0  # Resetovani hada, smeru, jablka a skore
+
 
 if __name__ == '__main__':
     # Hlavni program
@@ -140,9 +151,9 @@ if __name__ == '__main__':
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # Pokud uzivatel zavre okno
-                    running = False
-                    pygame.quit()
-                    sys.exit()
+                running = False
+                pygame.quit()
+                sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_w and direction != (0, 1):  # Pohyb nahoru
                     direction = (0, -1)
